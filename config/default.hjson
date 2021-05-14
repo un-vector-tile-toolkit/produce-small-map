@@ -1,0 +1,50 @@
+{
+un-s: { 
+  Z: 0
+  relations: [
+   un_base::public::custom_planet_land_a_l08
+   un_base::public::custom_planet_ocean_l08
+   un_base::public::unhq_bndl
+   un_base::public::unhq_bndl05
+   un_base::public::unhq_bndl25
+   un_base::public::custom_ne_rivers_lakecentrelines
+   un_base::public::unhq_bnda_cty_anno_l03
+   un_base::public::unhq_bnda_cty_anno_l04
+   un_base::public::unhq_bnda_cty_anno_l05
+   un_base::public::unhq_bnda_cty_anno_l06
+   un_base::public::unhq_cm02_phyp_anno_l04
+   un_base::public::unhq_cm02_phyp_anno_l06
+   un_base::public::unhq_phyp
+   un_base::public::unhq_popp
+   ]
+  mbtilesDir: small_tiles
+  propertyBlacklist: [
+    description
+    fid
+    fid_1
+    globalid
+    id
+    objectid_1
+    osm_id
+    pseudoarea
+  ]
+  conversionTilelist: [
+  0-0-0
+  ]
+  host: localhost
+  concurrent: 4
+  port: 5432
+  dbUser: postgress
+  dbPassword: ABCDEFG
+ }
+  wtpsThreshold: 50
+  monitorPeriod: 10
+  concurrentS: 1
+  maxRetries: 5
+  retryDelay: 5000
+  logDir: log
+  defaultDate: 2021-01-20
+  spinnerString: 18
+  fetchSize: 300
+  tippecanoePath: /usr/local/bin/tippecanoe
+}
