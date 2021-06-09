@@ -4,6 +4,7 @@ un-s: {
   relations: [
    un_base::public::custom_planet_land_a_l08
    un_base::public::custom_planet_ocean_l08
+   un_base::public::un_glc30_global_lc_ss
    un_base::public::unhq_bndl
    un_base::public::unhq_bndl05
    un_base::public::unhq_bndl25

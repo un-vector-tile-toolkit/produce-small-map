@@ -42,72 +42,9 @@ if(f!==null){
 }
 
 
-const flap = (f, defaultZ) => {
-  switch (f.geometry.type) {
-    case 'MultiPolygon':
-    case 'Polygon':
-      let mz = Math.floor(
-        19 - Math.log2(geojsonArea.geometry(f.geometry)) / 2
-      )
-      if (mz > 15) { mz = 15 }
-      if (mz < 6) { mz = 6 }
-      return mz
-    default:
-      return defaultZ ? defaultZ : 10
-  }
-}
+
 
 const lut = {
-//osm
-  landuse_naturalmedium0609_a: f => {
-//    let lc_arr = [20, 30, 80]
-//    if (!lc_arr.includes(f.properties.gridcode)) return null
-    f.tippecanoe = {
-      layer: 'nature-s',
-      minzoom: 5,
-      maxzoom: 5
-    }
-    delete f.properties['id']
-    delete f.properties['osm_id']
-    delete f.properties['class']
-    delete f.properties['ungsc_ctry']
-    delete f.properties['ungsc_mission']
-    return f
-  },
-  roads_major_0408_l: f => {
-    f.tippecanoe = {
-      layer: 'road-s',
-      minzoom: 3,
-      maxzoom: 5
-    }
-    delete f.properties['id']
-    delete f.properties['osm_id']
-    delete f.properties['class']
-    delete f.properties['fclass']
-    delete f.properties['ref']
-    delete f.properties['bridge']
-    delete f.properties['tunnel']
-    delete f.properties['ford']
-    delete f.properties['oneway']
-    delete f.properties['access']
-    delete f.properties['surface']
-    delete f.properties['width']
-    delete f.properties['tracktype']
-    delete f.properties['ungsc_ctry']
-    delete f.properties['ungsc_mission']
-//    let rd_arr = [1, 3, 5, 7]
-//    if (!rd_arr.includes(f.properties.z_order)) {
-//    return null
-//    } else {
-//    return f
-//    }
-    if (f.properties.z_order == 1 || f.properties.z_order == 3 || f.properties.z_order == 5 || f.properties.z_order == 7){
-    return f
-    } else {
-    return null
-    }
-  },
- // un1 Base
   custom_planet_land_a_l08: f => {
     f.tippecanoe = {
       layer: 'landmass',
@@ -135,7 +72,13 @@ const lut = {
       maxzoom: 5
     }
     delete f.properties['id']
+    delete f.properties['objectid']
+    delete f.properties['objectid_1']
+    if (f.properties.gridcode == 20 || f.properties.gridcode == 30 || f.properties.gridcode == 80){
     return f
+    } else {
+    return null
+    }
   },
   unhq_bndl: f => {
     f.tippecanoe = {
@@ -144,6 +87,9 @@ const lut = {
       maxzoom: 5
     }
     delete f.properties['objectid']
+    delete f.properties['bdytyp_code']
+    delete f.properties['iso3cd']
+    delete f.properties['globalid']
   //no need admin 1 and 2 for ZL5 
   if (f.properties.bdytyp === 'Administrative boundary 1' ||f.properties.bdytyp === 'Administrative boundary 2') {
     return null
@@ -158,6 +104,9 @@ const lut = {
       maxzoom: 4
     }
     delete f.properties['objectid']
+    delete f.properties['bdytyp_code']
+    delete f.properties['iso3cd']
+    delete f.properties['globalid']
   //no need admin 1 and 2 for small scale
   if (f.properties.bdytyp === 'Administrative boundary 1' || f.properties.bdytyp === 'Administrative boundary 2') {
     return null
@@ -172,6 +121,9 @@ const lut = {
       maxzoom: 2
     }
     delete f.properties['objectid']
+    delete f.properties['bdytyp_code']
+    delete f.properties['iso3cd']
+    delete f.properties['globalid']
   //no need admin 1 and 2 for small scale
   if (f.properties.bdytyp === 'Administrative boundary 1' || f.properties.bdytyp === 'Administrative boundary 2') {
     return null
@@ -191,10 +143,10 @@ const lut = {
   } else {
     f.tippecanoe.minzoom = 5
   }
+    delete f.properties['objectid']
     delete f.properties['strokeweig']
     delete f.properties['dissolve']
     delete f.properties['note']
-    delete f.properties['mission']
     return f
   },
   unhq_bnda_cty_anno_l03: f => {
@@ -203,15 +155,27 @@ const lut = {
       minzoom: 1,
       maxzoom: 1
     }
-   //if we need to remove features with status 1
-   //if (f.properties.status == 1) {
-   //delete f
-   //} 
-    delete f.properties['zorder']
-    delete f.properties['annotationclassid']
+    delete f.properties['zorder'] //no info
     delete f.properties['element']
     delete f.properties['symbolid']
-    return f
+    delete f.properties['fontsize']
+    delete f.properties['underline']
+    delete f.properties['verticalalignment']
+    delete f.properties['horizontalalignment']
+    delete f.properties['xoffset']
+    delete f.properties['yoffset']
+    delete f.properties['angle']
+    delete f.properties['fontleading']
+    delete f.properties['wordspacing']
+    delete f.properties['characterwidth']
+    delete f.properties['characterspacing']
+    delete f.properties['flipangle']
+    delete f.properties['orid_fid']
+   if (f.properties.status == 1) {
+     return null
+   } else {
+     return f
+   }
   },
   unhq_bnda_cty_anno_l04: f => {
     f.tippecanoe = {
@@ -219,15 +183,27 @@ const lut = {
       minzoom: 2,
       maxzoom: 2
     }
-   //if we need to remove features with status 1
-   //if (f.properties.status == 1) {
-   //delete f
-   //} 
-    delete f.properties['zorder']
-    delete f.properties['annotationclassid']
+    delete f.properties['zorder'] //no info
     delete f.properties['element']
     delete f.properties['symbolid']
-    return f
+    delete f.properties['fontsize']
+    delete f.properties['underline']
+    delete f.properties['verticalalignment']
+    delete f.properties['horizontalalignment']
+    delete f.properties['xoffset']
+    delete f.properties['yoffset']
+    delete f.properties['angle']
+    delete f.properties['fontleading']
+    delete f.properties['wordspacing']
+    delete f.properties['characterwidth']
+    delete f.properties['characterspacing']
+    delete f.properties['flipangle']
+    delete f.properties['orid_fid']
+   if (f.properties.status == 1) {
+     return null
+   } else {
+     return f
+   }
   },
   unhq_bnda_cty_anno_l05: f => {
     f.tippecanoe = {
@@ -235,15 +211,27 @@ const lut = {
       minzoom: 3,
       maxzoom: 3
     }
-   //if we need to remove features with status 1
-   //if (f.properties.status == 1) {
-   //delete f
-   //} 
-    delete f.properties['zorder']
-    delete f.properties['annotationclassid']
+    delete f.properties['zorder'] //no info
     delete f.properties['element']
     delete f.properties['symbolid']
-    return f
+    delete f.properties['fontsize']
+    delete f.properties['underline']
+    delete f.properties['verticalalignment']
+    delete f.properties['horizontalalignment']
+    delete f.properties['xoffset']
+    delete f.properties['yoffset']
+    delete f.properties['angle']
+    delete f.properties['fontleading']
+    delete f.properties['wordspacing']
+    delete f.properties['characterwidth']
+    delete f.properties['characterspacing']
+    delete f.properties['flipangle']
+    delete f.properties['orid_fid']
+   if (f.properties.status == 1) {
+     return null
+   } else {
+     return f
+   }
   },
   unhq_bnda_cty_anno_l06: f => {
     f.tippecanoe = {
@@ -251,15 +239,27 @@ const lut = {
       minzoom: 4,
       maxzoom: 5
     }
-   //if we need to remove features with status 1
-   //if (f.properties.status == 1) {
-   //delete f
-   //} 
-    delete f.properties['zorder']
-    delete f.properties['annotationclassid']
+    delete f.properties['zorder'] //no info
     delete f.properties['element']
     delete f.properties['symbolid']
-    return f
+    delete f.properties['fontsize']
+    delete f.properties['underline']
+    delete f.properties['verticalalignment']
+    delete f.properties['horizontalalignment']
+    delete f.properties['xoffset']
+    delete f.properties['yoffset']
+    delete f.properties['angle']
+    delete f.properties['fontleading']
+    delete f.properties['wordspacing']
+    delete f.properties['characterwidth']
+    delete f.properties['characterspacing']
+    delete f.properties['flipangle']
+    delete f.properties['orid_fid']
+   if (f.properties.status == 1) {
+     return null
+   } else {
+     return f
+   }
   },
   unhq_cm02_phyp_anno_l04: f => {
     f.tippecanoe = {
@@ -279,6 +279,26 @@ const lut = {
   } 
     delete f.properties['zorder']
     delete f.properties['element']
+    delete f.properties['bold']
+    delete f.properties['bold_resolved']
+    delete f.properties['italic']
+    delete f.properties['italic_resolved']
+    delete f.properties['underline']
+    delete f.properties['underline_resolved']
+    delete f.properties['verticalalignment']
+    delete f.properties['horizontalalignment']
+    delete f.properties['verticalalignment_resolved']
+    delete f.properties['horizontalalignment_resolved']
+    delete f.properties['xoffset']
+    delete f.properties['yoffset']
+    delete f.properties['angle']
+    delete f.properties['fontleading']
+    delete f.properties['wordspacing']
+    delete f.properties['characterwidth']
+    delete f.properties['characterspacing']
+    delete f.properties['flipangle']
+    delete f.properties['orid_fid']
+    delete f.properties['override']
   if (f.properties.status == 1) {
     return null
   } else {
@@ -296,6 +316,26 @@ const lut = {
   }
     delete f.properties['zorder']
     delete f.properties['element']
+    delete f.properties['bold']
+    delete f.properties['bold_resolved']
+    delete f.properties['italic']
+    delete f.properties['italic_resolved']
+    delete f.properties['underline']
+    delete f.properties['underline_resolved']
+    delete f.properties['verticalalignment']
+    delete f.properties['horizontalalignment']
+    delete f.properties['verticalalignment_resolved']
+    delete f.properties['horizontalalignment_resolved']
+    delete f.properties['xoffset']
+    delete f.properties['yoffset']
+    delete f.properties['angle']
+    delete f.properties['fontleading']
+    delete f.properties['wordspacing']
+    delete f.properties['characterwidth']
+    delete f.properties['characterspacing']
+    delete f.properties['flipangle']
+    delete f.properties['orid_fid']
+    delete f.properties['override']
   if (f.properties.status == 1) {
     return null
   } else {
@@ -308,13 +348,11 @@ const lut = {
       minzoom: 5,
       maxzoom: 5
     }
-//edit 2021-01-27 starts
-f.properties.display = 0
-if (f.properties.type_code == 4 && !/Sea|Ocean|Gulf/.test(f.properties.name) ){
-f.properties.display = 1
-}
-//edit 2021-01-27 ends
-    return f
+   if (f.properties.type_code == 4 && !/Sea|Ocean|Gulf/.test(f.properties.name) ){
+     return f
+   } else {
+     return null
+   }
   },
   unhq_popp: f => {
     f.tippecanoe = {
@@ -322,7 +360,6 @@ f.properties.display = 1
       minzoom: 3,
       maxzoom: 5
     }
-//    let popp_arr = [1, 2, 3]
    if (f.properties.cartolb === 'Alofi' ||f.properties.cartolb === 'Avarua' ||f.properties.cartolb === 'Sri Jayewardenepura Kotte' ) {
      return null
     } else if (f.properties.poptyp_code == 1 || f.properties.poptyp_code == 2) {
