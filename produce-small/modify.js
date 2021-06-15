@@ -357,7 +357,7 @@ const lut = {
   unhq_wbya10: f => {
     f.tippecanoe = {
       layer: 'wbya10',
-      minzoom: 3,
+      minzoom: 2,
       maxzoom: 5
     }
     delete f.properties['objectid']
@@ -367,7 +367,7 @@ const lut = {
   unhq_dral10: f => {
     f.tippecanoe = {
       layer: 'dral10',
-      minzoom: 3,
+      minzoom: 2,
       maxzoom: 5
     }
     delete f.properties['objectid']
