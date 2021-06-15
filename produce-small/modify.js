@@ -269,11 +269,11 @@ const lut = {
     }
   //Ocean minz 1, Bay minz 2, Sea minz3
   if (f.properties.annotationclassid == 0 || f.properties.annotationclassid == 1) {
-    f.tippecanoe.minzoom = 1
+    f.tippecanoe.minzoom = 0
   } else if (f.properties.annotationclassid == 3) {
-    f.tippecanoe.minzoom = 2
+    f.tippecanoe.minzoom = 1
   } else if (f.properties.annotationclassid == 2 || f.properties.annotationclassid == 4 || f.properties.annotationclassid == 5) {
-    f.tippecanoe.minzoom = 3
+    f.tippecanoe.minzoom = 2
   } else {
     f.tippecanoe.minzoom = 5
   } 
