@@ -17,6 +17,8 @@ un-s: {
    un_base::public::unhq_cm02_phyp_anno_l06
    un_base::public::unhq_phyp
    un_base::public::unhq_popp
+   un_base::public::unhq_wbya10
+   un_base::public::unhq_dral10
    ]
   mbtilesDir: small_tiles
   propertyBlacklist: [

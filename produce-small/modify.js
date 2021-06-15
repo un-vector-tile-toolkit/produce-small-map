@@ -354,6 +354,26 @@ const lut = {
      return null
    }
   },
+  unhq_wbya10: f => {
+    f.tippecanoe = {
+      layer: 'wbya10',
+      minzoom: 3,
+      maxzoom: 5
+    }
+    delete f.properties['objectid']
+    delete f.properties['fid_1']
+    return f
+  },
+  unhq_dral10: f => {
+    f.tippecanoe = {
+      layer: 'dral10',
+      minzoom: 3,
+      maxzoom: 5
+    }
+    delete f.properties['objectid']
+    delete f.properties['fid_1']
+    return f
+  },
   unhq_popp: f => {
     f.tippecanoe = {
       layer: 'un_popp',
